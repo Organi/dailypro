@@ -1,10 +1,10 @@
 import math
 
 def standard_dev(values):
-	mean = sum(map(int, values)) / len(values)
+	mean = sum(map(int, values)) / float(len(values))
 	squared_differences = [pow(val-mean, 2) for val in map(int, values)]
 	sum_of_squares = sum(squared_differences)
-	variance = sum_of_squares / len(values)
+	variance = sum_of_squares / float(len(values))
 	sd = math.sqrt(variance)
 	return sd
 
