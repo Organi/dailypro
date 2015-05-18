@@ -10,8 +10,7 @@ current = start
 
 while len(num_list) == 0 or Counter(num_list).most_common(1)[0][1] < 2:
 	for c in str(current):
-		i = int(c)
-		total += pow(i, base)
+		total += pow(int(c), base)
 	num_list.append(total)
 	current = total
 	total = 0
