@@ -1,15 +1,26 @@
 import itertools
+import timeit
+import sys
 from itertools import product
 
-canvas = "20 10".split(' ')
-sheets = [
-	"1 5 5 10 3",
-	"2 0 0 7 7"
-]
+start = timeit.default_timer()
+
+if len(sys.argv) > 1:
+	filename = sys.argv[1]
+else:
+	filename = 'file_input'
+
+sheets = [line.strip() for line in open(filename)]
+canvas = sheets.pop(0).split(' ')
+
+#canvas = "20 10".split(' ')
+#sheets = [
+#	"1 5 5 10 3",
+#	"2 0 0 7 7"
+#]
 
 totalTiles = int(canvas[0]) * int(canvas[1])
 totals = {}
-totals[0] = totalTiles
 usedSheets = []
 
 # Returns true if the two rectangles have any overlap
@@ -52,6 +63,10 @@ for sheet in reversed(sheets):
 		totals[data[0]] = noOfColour
 	usedSheets.append(data)
 
+stop = timeit.default_timer()
+
 # Calculate the amount remaining of the original colour 0
-totals[0] = totals[0] - (sum(totals.itervalues()) - totals[0])
+totals[0] = totalTiles - (sum(totals.itervalues()) - totals[0])
 print totals
+print sum(totals.values())
+print "Running Time: " + str(stop-start)
