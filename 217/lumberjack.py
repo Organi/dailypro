@@ -14,9 +14,15 @@ buckets = []
 for s in data:
 	[buckets.append(int(el)) for el in s.split(' ')]
 
+minimum = min(buckets)
 while no_of_logs > 0:
-	buckets[buckets.index(min(buckets))] += 1
-	no_of_logs -= 1
+	for i, v in enumerate(buckets):
+		if v == minimum:
+			buckets[i] += 1
+			no_of_logs -= 1
+			if no_of_logs <= 0:
+				break
+	minimum = min(buckets)
 
 for i in range(size):
 	for j in range(size):
