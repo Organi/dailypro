@@ -5,7 +5,7 @@ import timeit
 start = timeit.default_timer()
 
 def calcDistance(c1, c2):
-	return math.sqrt((c1[0]-c2[0])**2 + (c1[1]-c2[1])**2)
+	return (c1[0]-c2[0])**2 + (c1[1]-c2[1])**2
 
 def getClosestTreat(coords, curr_pos):
 	if len(coords) > 0:
@@ -14,6 +14,7 @@ def getClosestTreat(coords, curr_pos):
 			dist = calcDistance(c, curr_pos)
 			if dist < closest[1]:
 				closest = [c, dist]
+		closest[1] = math.sqrt(closest[1])
 		return closest
 	else:
 		return 0
@@ -26,7 +27,6 @@ else:
 coords = [line.strip() for line in open(filename)]
 no_of_treats = int(coords.pop(0))
 coords = [tuple(map(float, x.split(' '))) for x in coords]
-
 
 curr_pos = (0.5, 0.5)
 distance_travelled = 0
